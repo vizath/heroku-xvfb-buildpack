@@ -18,9 +18,6 @@ if ! [ -e $CACHE_DIR/$FILE_NAME ]; then
   curl $BUILDPACK_XVFB_PACKAGE -s -o $CACHE_DIR/$FILE_NAME
 fi
 
-echo "-----> Extracting XVFB binaries to ${BUILD_DIR}/vendor/xvfb"
-mkdir -p $CACHE_DIR/$ARCHIVE_NAME
+echo "-----> Extracting XVFB binaries to ${BUILD_DIR}/vendor/Xvfb"
 mkdir -p $BUILD_DIR/vendor
-tar jxf $CACHE_DIR/$FILE_NAME -C $CACHE_DIR
-mv $CACHE_DIR/$ARCHIVE_NAME $BUILD_DIR/vendor/xvfb
-sudo apt-get install xvfb -y
+tar jxf $CACHE_DIR/$FILE_NAME -C $BUILD_DIR/vendor

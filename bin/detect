@@ -1,4 +1,4 @@
 #!/bin/sh
 
-echo "xvfb"
+echo "Xvfb"
 exit 0

@@ -1,32 +1,15 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-set -e
+echo "-----> Installing Xvfb Portable"
+# Go to app folder
+cd $1
 
-BUILD_DIR=$1
-CACHE_DIR=$2
+# Get firefox tar
+curl https://raw.githubusercontent.com/kenshin23/xvfb-portable-binary/master/Xvfb.tar.xz -s -O -ssl3
 
-# config
-# http://orm-buildpack.s3.amazonaws.com/Xvfb.tar.gz
+# Create bin folder in vendor
+mkdir -p vendor/xvfb
 
-# Buildpack URL
-ARCHIVE_NAME=xvfb
-FILE_NAME=${ARCHIVE_NAME}.tar.bz2
-BUILDPACK_XVFB_PACKAGE=https://s3.amazonaws.com/heroku.buildpacks/${FILE_NAME}
-
-mkdir -p $CACHE_DIR
-if ! [ -e $CACHE_DIR/$FILE_NAME ]; then
-  echo "-----> Fetching XVFB binaries at ${BUILDPACK_XVFB_PACKAGE}"
-  curl $BUILDPACK_XVFB_PACKAGE -s -o $CACHE_DIR/$FILE_NAME
-fi
-
-echo "-----> Extracting XVFB binaries to ${BUILD_DIR}/vendor/xvfb"
-mkdir -p $CACHE_DIR/$ARCHIVE_NAME
-mkdir -p $BUILD_DIR/vendor
-tar jxf $CACHE_DIR/$FILE_NAME -C $CACHE_DIR
-mv $CACHE_DIR/$ARCHIVE_NAME $BUILD_DIR/vendor/xvfb
-
-echo "-----> exporting PATH and LIBRARY_PATH"
-PROFILE_PATH="$BUILD_DIR/.profile.d/xvfb.sh"
-mkdir -p $(dirname $PROFILE_PATH)
-echo 'export PATH="$PATH:vendor/xvfb/bin"' >> $PROFILE_PATH
-echo 'export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:vendor/xvfb/lib"' >> $PROFILE_PATH
+# Extract all files
+echo "       Extracting files to 'vendor/xvfb'..."
+tar --preserve-permissions --preserve-order -xvf Xvfb.tar.xz -C vendor/xvfb

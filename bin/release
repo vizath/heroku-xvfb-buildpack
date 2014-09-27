@@ -7,5 +7,5 @@ config_vars:
   LD_LIBRARY_PATH: "/usr/local/lib:/usr/lib:/lib:/app/vendor/xvfb/cde-root/usr/lib"
   TMPDIR: "/app/tmp"
 default_process_types:
-  console: "vendor/xvfb/cde-root/usr/bin/xvfb"
+  console: "vendor/xvfb/cde-root/usr/bin/Xvfb"
 EOF

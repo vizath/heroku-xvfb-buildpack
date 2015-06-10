@@ -16,4 +16,4 @@ mkdir -p $BUILD_DIR/vendor/xvfb
 
 # Extract all files
 echo "       Extracting files to 'vendor/xvfb'..."
-tar --preserve-permissions --preserve-order -xvf Xvfb.tar.xz -C $BUILD_DIR/vendor/xvfb
+tar --preserve-permissions --preserve-order -xvf $CACHE_DIR/$FILE_NAME -C $BUILD_DIR/vendor/xvfb

@@ -1,15 +1,19 @@
 #!/usr/bin/env bash
 
+BUILD_DIR=$1
+CACHE_DIR=$2
+
 echo "-----> Installing Xvfb Portable"
-# Go to app folder
-cd $1
+
+mkdir -p $CACHE_DIR
 
 # Get firefox tar
-curl https://raw.githubusercontent.com/kenshin23/xvfb-portable-binary/master/Xvfb.tar.xz -s -O -ssl3
+FILE_NAME=Xvfb.tar.xz
+curl http://raw.githubusercontent.com/kenshin23/xvfb-portable-binary/master/${FILE_NAME} -L -s -o $CACHE_DIR/$FILE_NAME
 
 # Create bin folder in vendor
-mkdir -p vendor/xvfb
+mkdir -p $BUILD_DIR/vendor/xvfb
 
 # Extract all files
 echo "       Extracting files to 'vendor/xvfb'..."
-tar --preserve-permissions --preserve-order -xvf Xvfb.tar.xz -C vendor/xvfb
+tar --preserve-permissions --preserve-order -xvf Xvfb.tar.xz -C $BUILD_DIR/vendor/xvfb
